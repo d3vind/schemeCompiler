@@ -43,7 +43,7 @@ public class lexerv2 {
 	}
 
 	/*
-	 * Given a String, and an index, get the token starting at that index
+	 * Given a String, and an index, get the substring of the token
 	 */
 	public static String location(String s, int i) {
 		counter = i;
@@ -62,6 +62,7 @@ public class lexerv2 {
 		input = s;
 
 		while (counter < input.length()) {
+			//resets character counter and increments line counter
 			if (input.charAt(counter) == '\n') {
 				newLineCounter++;
 				counter = 0;
@@ -90,9 +91,18 @@ public class lexerv2 {
 					break;
 
 			}
+			
+			//handles bool
+			if(input.charAt(counter) == '#' && input.charAt(counter+ 1) == 't' || input.charAt(counter+ 1) == 'f') {
+				result.add(new Token(Type.BOOL, "bool", counter, newLineCounter));
+				counter = counter + 2;
+				if (counter >= input.length())
+					break;
+
+			
+			}
 			// need to implement this for numbers, strings etc.
-			if (input.charAt(counter) >= 65 && input.charAt(counter) <= 90
-					|| input.charAt(counter) >= 97 && input.charAt(counter) <= 122) {
+			if (input.charAt(counter) >= 65 && input.charAt(counter) <= 90|| input.charAt(counter) >= 97 && input.charAt(counter) <= 122) {
 				isString();
 				/*
 				 * String subString = location(input, i); i = subString.length() + i;
@@ -104,6 +114,7 @@ public class lexerv2 {
 		return result;
 
 	}
+
 
 	public static void isString() {
 		String string = location(input, counter);
