@@ -91,7 +91,7 @@ public class lexerv2 {
 					break;
 
 			}
-			
+			/*
 			//handles bool
 			if(input.charAt(counter) == '#' && input.charAt(counter+ 1) == 't' || input.charAt(counter+ 1) == 'f') {
 				result.add(new Token(Type.BOOL, "bool", counter, newLineCounter));
@@ -101,6 +101,8 @@ public class lexerv2 {
 
 			
 			}
+			*/
+			
 			// need to implement this for numbers, strings etc.
 			if (input.charAt(counter) >= 65 && input.charAt(counter) <= 90|| input.charAt(counter) >= 97 && input.charAt(counter) <= 122) {
 				isString();
