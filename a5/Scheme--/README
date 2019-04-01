@@ -1,0 +1,26 @@
+This is the sample implementation of the scanner.  To run it standalone, you
+can run
+
+    make
+
+This creates a scanner.jar file.  You can then run the scanner using
+
+    java -jar scanner.jar <scheme-- input>
+
+If you need this scanner as a basis for your parser implementation, then you
+should look at the main method in ca.dal.cs.schememm.scanner.Scanner.java.  It
+demonstrates how to use the scanner.  In a nutshell, the character stream
+consumed by the scanner and the scanner itself are classes that implement the
+Stream interface.  A Stream is a sequence that allows you to inspect the
+current element using item().  To advance to the next item, use step().  When
+there is no current item, i.e., you have advanced past the end of the input,
+item() returns null.
+
+Thus, to create a scanner that produces a token stream to be consumed by a
+parser, you should use a skeleton that looks like this:
+
+    CharStream chars = CharStream.fromFile(...);
+    Scanner tokens = new Scanner(chars);
+    Parser parser = new Parser(tokens);
+    ParseTree tree = parser.run();
+    // Now print the parse tree
